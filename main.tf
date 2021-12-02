@@ -20,6 +20,13 @@ resource "docker_container" "docusaurus-zup" {
   image = docker_image.docusaurus-zup.latest
   ports {
     internal = 3000
-    external = 3000
   }
+}
+
+output "docker_name" {
+  value = docker_container.docusaurus-zup.name
+}
+
+output "ip_address" {
+  value = join(":", [docker_container.docusaurus-zup.ip_address, docker_container.docusaurus-zup.ports[0].external])
 }
